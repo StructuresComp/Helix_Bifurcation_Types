@@ -1,1 +1,0 @@
-# Helix_Bifurcation_Types
