@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<library path="lib/libsawyer_right_arm_moveit_ikfast_plugin">
+  <class base_class_type="kinematics::KinematicsBase" name="sawyer_right_arm/IKFastKinematicsPlugin" type="sawyer_right_arm::IKFastKinematicsPlugin">
+    <description>IKFast61 plugin for closed-form kinematics of sawyer right_arm</description>
+  </class>
+</library>

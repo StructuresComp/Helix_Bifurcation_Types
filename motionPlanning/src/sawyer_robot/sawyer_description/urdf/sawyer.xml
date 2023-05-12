@@ -1,0 +1,6 @@
+<robot file="sawyer1.dae">
+        <Manipulator name="right_arm">
+          <base>base</base>
+          <effector>right_motor_tip</effector>
+        </Manipulator>
+</robot>

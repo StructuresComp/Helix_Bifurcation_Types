@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<launch>
+
+  <arg name="save_file" default="/home/dezhong/Desktop/Helix_Instability/Helix_Bifurcation_Types/MotionPlanning/src/helix_test/saveData/c1_1_c2_0.txt" />
+  <arg name="file_name" default="/home/dezhong/Desktop/Helix_Instability/Helix_Bifurcation_Types/simCodes/datafiles/simData_c1_1_c2_0_Poisson_0.5_kapB_5.2707_exp_1.txt" />
+
+  <node name="helix_node" type="helix_test_node" pkg="helix_test" output="screen">
+    <param name="group_name" value="right_arm"/>
+    <param name="tip_link" value="right_motor_tip"/>
+    <param name="base_link" value="base"/>
+    <param name="world_frame" value="base"/>
+    <param name="filename" value="$(arg file_name)"/>
+    <param name="savefile" value="$(arg save_file)"/>
+    <rosparam param="offset">[0.85, -0.15, -0.144]</rosparam>
+    <!-- <rosparam param="offset">[0.85, -0.2, -0.314]</rosparam> -->
+    <rosparam param="trajectory/seed_pose">[-0.8574501953125, -0.8733701171875, -1.8194189453125, -0.0341552734375, 1.86024609375, 2.4338759765625, -2.2000966796875 ]</rosparam>
+    <param name="visualization/min_point_distance" value="0.02"/>
+</node>
+</launch>

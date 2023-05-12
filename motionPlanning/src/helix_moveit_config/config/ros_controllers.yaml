@@ -1,0 +1,46 @@
+right_arm_controller:
+  type: effort_controllers/JointTrajectoryController
+  joints:
+    - right_j0
+    - right_j1
+    - right_j2
+    - right_j3
+    - right_j4
+    - right_j5
+    - right_j6
+  gains:
+    right_j0:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    right_j1:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    right_j2:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    right_j3:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    right_j4:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    right_j5:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    right_j6:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1

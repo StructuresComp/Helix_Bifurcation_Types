@@ -1,0 +1,12 @@
+motionPlanning/build/
+motionPlanning/devel/
+motionPlanning/.catkin_workspace
+simCodes/build/
+simCodes/datafiles/
+simCodes/plotFunc/
+simCodes/runSim.asv
+simCodes/simDER
+DataProcessing/PlotFunc/createSIExp.m
+# DataProcessing/Joints
+# DataProcessing/Simulations
+# DataProcessing/Observations

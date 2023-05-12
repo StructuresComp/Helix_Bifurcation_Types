@@ -1,0 +1,18 @@
+RodLength 1
+youngM 1.12e9
+rodRadius 0.01
+Poisson -0.25
+deltaTime 1e-2
+tol 1e-7
+stol 1e-7
+maxIter 100
+density 10
+gVector 0.0 0.0 0
+viscosity 0.00
+numVertices 101
+render 1
+saveData 1
+v_constant 0.1
+c1 0.505
+c2 0
+kapB 7.5
