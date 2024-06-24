@@ -65,9 +65,9 @@ Specifiable parameters are as follows (we use SI units):
 
 ***
 ### Running the Simulation
-In this folder, we offer MatLab file ```ruSim.m``` for simple execution of the codes. However, before running Matlab, the user should define the enviornment variable ```export LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6``` Users can claim the exploring direction ``S`` and Poisson's ratio ``Poisson``at the beginning of the Matlab code. Then, the Matlab file will execute the simulation program. Here, we have the variable ``experiment``, which is used to control how we would like to run the simulation. If ``experiment = 0``, the simulation program will the executed and show the plot of exploring distance v.s. difference between the rod's configuration and the prescribed helical centerline. If ``experiment = 1``, the simulation program will generate the input file for the following robotic motion planning.
+In this folder, we offer MatLab file ```ruSim.m``` for simple execution of the codes. However, before running Matlab, the user should define the environment variable ```export LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6``` Users can claim the exploring direction ``S`` and Poisson's ratio ``Poisson``at the beginning of the Matlab code. Then, the Matlab file will execute the simulation program. Here, we have the variable ``experiment``, which is used to control how we would like to run the simulation. If ``experiment = 0``, the simulation program will be executed and show the plot of exploring distance v.s. difference between the rod's configuration and the prescribed helical centerline. If ``experiment = 1``, the simulation program will generate the input file for the following robotic motion planning.
 
-If the user does not have a license for MatLab, they can set parameters in the ``option.txt''. Once parameters are set to your liking, the simulation can be ran from the terminal by running the provided script:
+If the user does not have a license for MatLab, they can set parameters in the ``option.txt''. Once parameters are set to your liking, the simulation can be run from the terminal by running the provided script:
 ```bash
 cd simCodes
 ./simDER option.txt
@@ -83,10 +83,10 @@ The ``motion planning `` folder is a ros workspace that contains the required co
 Install the following dependencies:
 - [ROS](http://wiki.ros.org/Installation/Ubuntu)
   - The Robot Operating System (ROS) is a set of software libraries and tools that help you build robot applications. 
-  - The installation instructions of ROS in ubuntu are [Here](http://wiki.ros.org/Installation/Ubuntu). Following the instructions and install all the ROS in the computer.
+  - The installation instructions of ROS in Ubuntu are [Here](http://wiki.ros.org/Installation/Ubuntu). Following the instructions and install all the ROS in the computer.
 
 - [User log-in file]
-  - We need to add the environment variable to the ``.bashrc`` file in Ubuntu system.
+  - We need to add the environment variable to the ``.bashrc`` file in the Ubuntu system.
   - Open a terminal and then do the following operations:
     ```bash
     vim .bashrc
@@ -113,7 +113,7 @@ catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3
 
 ### Setting Parameters
 
-All motion planning parameters are set through a launch file ```helix_run.launch```. The launch file locates in the subfolder ``motionPlanning/src/helix_text/launch/helix_run.launch``. There are a few parameters in the launch file, and we justify the meaning of each parameter here.
+All motion planning parameters are set through a launch file ```helix_run.launch```. The launch file is located in the subfolder ``motionPlanning/src/helix_text/launch/helix_run.launch``. There are a few parameters in the launch file, and we justify the meaning of each parameter here.
 
 - ```group_name``` - Name of planning group(robot).
 - ```tip_link``` - The frame of the manipulator.
@@ -125,7 +125,7 @@ All motion planning parameters are set through a launch file ```helix_run.launch
 - ```trajectory/seed_pose``` - A joint seed for solving the trajectory
 - ```visualization/min_point_distance```- The distance of the visualized discrete trajectory in rviz.
 
-Note that the user can visualize the planned path in ```rviz```, the user should change the arg ```use_rviz``` in ```helix_setup.launch``` to ```true```. However, it is not recommended, cause rviz require the graphics card driver setup in the workstation for running the codes.
+Note that the user can visualize the planned path in ```rviz```, the user should change the arg ```use_rviz``` in ```helix_setup.launch``` to ```true```. However, it is not recommended cause viz requires the graphics card driver setup in the workstation for running the codes.
 
 When doing the motion planning, the main parameters that need to be adjusted are ``filename``, ``savefile``, and ``offset``.
 
@@ -162,8 +162,10 @@ All motion planning parameters are set through a launch file ```helix_run.launch
 - ```trajectory/seed_pose``` - A joint seed for solving the trajectory
 - ```visualization/min_point_distance```- The distance of the visualized discrete trajectory in rviz.
 
+Note that the user must turn off the visualization of ```rviz``` here. The user should change the arg ```use_rviz``` in ```helix_setup.launch``` to ```false```.
+
 ### Running codes with docker
-Once the paramters are set. The user should navigate to the folder ```motionPlanning``` first:
+Once the parameters are set. The user should navigate to the folder ```motionPlanning``` first:
 ```bash
  cd motionPlanning 
 ```
@@ -190,15 +192,15 @@ We can find the planned robot joint trajectory is saved under the path specified
 The ``DataProcessing`` folder contains the codes and files for classifying the buckling points from experimental data. 
 
 ### Dependencies
-User should have `MaTLaB` installed in the computer. This script also uses the ``Robotics System Toolbox``
+The user should have `Matlab` installed on the computer. This script also uses the ``Robotics System Toolbox``
 - [Robotics System Toolbox](https://www.mathworks.com/products/robotics.html)
   - Robotics System Toolbox rovides tools and algorithms for designing, simulating, testing, and deploying manipulator and mobile robot applications. 
   - Free trial of Robotics System Toolbox in `MatLab` are [Here](https://www.mathworks.com/campaigns/products/trials.html). Following the instructions and install them in the computer.
 
 ### Data Explanation
-The ``Joints`` folder contains the joint trajectory inputted to the robots. The ``Simulations`` folder contains the simulation data. The ``Observations`` contains the raw experimental data. For the files in the ``Observation`` folder, each row is the sampled data, which is a 1 x 12 vector. The 1st to 7th elements are the joints positions expressing the robot's configuration; the 8th to 10th elements are the raw 3D position of the attached marker in the camera frame; the 11th to 12th are the pixel coordinate of the attached marker in the image domain.
+The ``Joints`` folder contains the joint trajectory inputted to the robots. The ``Simulations`` folder contains the simulation data. The ``Observations`` contains the raw experimental data. For the files in the ``Observation`` folder, each row is the sampled data, which is a 1 x 12 vector. The 1st to 7th elements are the joint positions expressing the robot's configuration; the 8th to 10th elements are the raw 3D position of the attached marker in the camera frame; the 11th to 12th are the pixel coordinates of the attached marker in the image domain.
 
 ### Running the Codes
-The ``PlotFunc`` folder contains the main scripts and relevant functions. The main script is named as ``processAllData.m``. Users can adjust the boolean variable ``withTwist`` to ``True`` or ``False`` to see the processed results of the manipulated rod with external twisting moment or without external moment.
+The ``PlotFunc`` folder contains the main scripts and relevant functions. The main script is named as ``processAllData.m``. Users can adjust the boolean variable ``withTwist`` to ``True`` or ``False`` to see the processed results of the manipulated rod with the external twisting moment or without external moment.
 
 ***
