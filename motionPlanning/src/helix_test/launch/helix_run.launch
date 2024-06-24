@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <launch>
 
-  <arg name="save_file" default="/home/dezhong/Desktop/Helix_Instability/Helix_Bifurcation_Types/MotionPlanning/src/helix_test/saveData/c1_1_c2_0.txt" />
-  <arg name="file_name" default="/home/dezhong/Desktop/Helix_Instability/Helix_Bifurcation_Types/simCodes/datafiles/simData_c1_1_c2_0_Poisson_0.5_kapB_5.2707_exp_1.txt" />
+  <arg name="save_file" default="/root/motionPlanning/src/helix_test/saveData/c1_1_c2_0.txt" />
+  <arg name="file_name" default="/root/simCodes/datafiles/simData_c1_1_c2_0_Poisson_0.5_kapB_5.2707_exp_1.txt" />
 
   <node name="helix_node" type="helix_test_node" pkg="helix_test" output="screen">
     <param name="group_name" value="right_arm"/>

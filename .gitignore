@@ -7,6 +7,7 @@ simCodes/plotFunc/
 simCodes/runSim.asv
 simCodes/simDER
 DataProcessing/PlotFunc/createSIExp.m
+.idea/
 # DataProcessing/Joints
 # DataProcessing/Simulations
 # DataProcessing/Observations
