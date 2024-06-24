@@ -1,6 +1,6 @@
 # Helix_Bifurcation_Types
 
-Codes for studying the pitch-fork bifurcations of a initially rod with helical centerline.
+Codes for studying the pitch-fork bifurcations of an initial rod with a helical centerline.
 
 <p align="center">
 <img src="images/introduction.png" alt>
@@ -24,7 +24,7 @@ Install the following C++ dependencies:
     ```
 
 - [OpenGL / GLUT](https://www.opengl.org/)
-  - OpenGL / GLUT is used for rendering the knot through a simple graphic.
+  - OpenGL / GLUT is used to render the knot using a simple graphic.
   - Simply install through apt package manager:
       ```bash
     sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev
@@ -65,9 +65,9 @@ Specifiable parameters are as follows (we use SI units):
 
 ***
 ### Running the Simulation
-In this folder, we offer MatLab file ```ruSim.m``` for simple execution of the codes. Users can claim the exploring direction ``S`` and Poisson's ratio ``Poisson`` in the beginning of the matlab code. Then, the matlab file will execute the simulation program. Here, we have the variable ``experiment``, which is used to control how we would like to run the simulation. If ``experiment = 0``, simulation program will the executed and show the plot of exploring distance v.s. difference between rod's configuration and prescribed helical centerline. If ``experiment = 1``, simulation program will generate the input file for the following robotic motion planning.
+In this folder, we offer MatLab file ```ruSim.m``` for simple execution of the codes. Users can claim the exploring direction ``S`` and Poisson's ratio ``Poisson``at the beginning of the Matlab code. Then, the Matlab file will execute the simulation program. Here, we have the variable ``experiment``, which is used to control how we would like to run the simulation. If ``experiment = 0``, the simulation program will the executed and show the plot of exploring distance v.s. difference between the rod's configuration and the prescribed helical centerline. If ``experiment = 1``, the simulation program will generate the input file for the following robotic motion planning.
 
-If the user does not have license for MatLab, they can set parameters in the ``option.txt''. Once parameters are set to your liking, the simulation can be ran from the terminal by running the provided script:
+If the user does not have a license for MatLab, they can set parameters in the ``option.txt''. Once parameters are set to your liking, the simulation can be ran from the terminal by running the provided script:
 ```bash
 cd simCodes
 ./simDER option.txt
@@ -76,7 +76,7 @@ cd simCodes
 ***
 
 ## Motion Planning Codes
-The ``motionPlanning`` folder is a ros workspace which contains the required codes for generate joint trajectory of a sawyer robot for doing robotic experiments along various exploring directions in the parameter space as shown in Fig. 1(a).
+The ``motion planning `` folder is a ros workspace that contains the required codes for generating the joint trajectory of a sawyer robot for doing robotic experiments along various exploring directions in the parameter space, as shown in Fig. 1(a).
 
 ***
 ### Dependencies
@@ -105,7 +105,7 @@ After completing all the necessary above steps, go to the folder of ``motionPlan
 ```bash
 catkin_make
 ```
-If a error about ``Unable to find either executable 'empy' or Python module 'em'...`` occurs. Compile the workspace with
+If an error about ``Unable to find either executable 'empy' or Python module 'em'...`` occurs. Compile the workspace with
 ```bash
 catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3
 ```
@@ -113,23 +113,25 @@ catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3
 
 ### Setting Parameters
 
-All motion planning parameters are set through a launch file ```helix_run.launch```. The launch file locates in the subfolder ``motionPlanning/src/helix_text/launch/helix_run.launch``. There are a few parameters in the launch file and we justify the meaning of each parameters here.
+All motion planning parameters are set through a launch file ```helix_run.launch```. The launch file locates in the subfolder ``motionPlanning/src/helix_text/launch/helix_run.launch``. There are a few parameters in the launch file, and we justify the meaning of each parameter here.
 
 - ```group_name``` - Name of planning group(robot).
 - ```tip_link``` - The frame of the manipulator.
 - ```base_link``` - The frame of the robot base (world frame).
 - ```world_frame``` - The world frame.
-- ```filename``` - The path of the generated input simulation data file.
+- ```filename``` - The path of the generated input simulation data file (which is usually under ```${Prefix}/simCodes/datafiles/xxx.txt```).
 - ```savefile``` - The path to save the planned joint trajectory.
-- ```offset``` - 3x1 vector for define the position trajectory in the world frame.
+- ```offset``` - 3x1 vector to define the position trajectory in the world frame.
 - ```trajectory/seed_pose``` - A joint seed for solving the trajectory
 - ```visualization/min_point_distance```- The distance of the visualized discrete trajectory in rviz.
 
-When doing the motion planning, the main parameters need to be adjusted is ``filename``, ``savefile``, and ``offset``.
+Note that the user can visualize the planned path in ```rviz```, the user should change the arg ```use_rviz``` in ```helix_setup.launch``` to ```true```. However, it is not recommended, cause rviz require the graphics card driver setup in the workstation for running the codes.
+
+When doing the motion planning, the main parameters that need to be adjusted are ``filename``, ``savefile``, and ``offset``.
 
 ***
 ### Running the planning codes
-After completeing the above steps, the user should open a terminal and go to the subfolder ``motionPlanning``, then running the provided script:
+After completing the above steps, the user should open a terminal and go to the subfolder ``motionPlanning``, then run the provided script:
 ```bash
  roslaunch helix_test helix_setup.launch 
 ```
@@ -139,6 +141,11 @@ Then, the user should generate the input file with simulation by executing the s
 ```bash
  roslaunch helix_test helix_run.launch 
 ```
+## Motion Planning Codes (with Docker)
+The motion planning code is built using ROS Melodic, which is designed for Ubuntu 18.04, limiting its compatibility with other Linux distributions. To address this, we provide instructions on how to use docker to run the code, regardless of your Linux distribution.
+### Dependencies
+Install the following dependencies:
+- [Docker](https://docs.docker.com/engine/install/ubuntu/)
 
 ***
 
