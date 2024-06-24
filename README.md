@@ -65,7 +65,7 @@ Specifiable parameters are as follows (we use SI units):
 
 ***
 ### Running the Simulation
-In this folder, we offer MatLab file ```ruSim.m``` for simple execution of the codes. Users can claim the exploring direction ``S`` and Poisson's ratio ``Poisson``at the beginning of the Matlab code. Then, the Matlab file will execute the simulation program. Here, we have the variable ``experiment``, which is used to control how we would like to run the simulation. If ``experiment = 0``, the simulation program will the executed and show the plot of exploring distance v.s. difference between the rod's configuration and the prescribed helical centerline. If ``experiment = 1``, the simulation program will generate the input file for the following robotic motion planning.
+In this folder, we offer MatLab file ```ruSim.m``` for simple execution of the codes. However, before running Matlab, the user should define the enviornment variable ```export LD_PRELOAD=/lib/x86_64-linux-gnu/libstdc++.so.6``` Users can claim the exploring direction ``S`` and Poisson's ratio ``Poisson``at the beginning of the Matlab code. Then, the Matlab file will execute the simulation program. Here, we have the variable ``experiment``, which is used to control how we would like to run the simulation. If ``experiment = 0``, the simulation program will the executed and show the plot of exploring distance v.s. difference between the rod's configuration and the prescribed helical centerline. If ``experiment = 1``, the simulation program will generate the input file for the following robotic motion planning.
 
 If the user does not have a license for MatLab, they can set parameters in the ``option.txt''. Once parameters are set to your liking, the simulation can be ran from the terminal by running the provided script:
 ```bash
@@ -119,7 +119,7 @@ All motion planning parameters are set through a launch file ```helix_run.launch
 - ```tip_link``` - The frame of the manipulator.
 - ```base_link``` - The frame of the robot base (world frame).
 - ```world_frame``` - The world frame.
-- ```filename``` - The path of the generated input simulation data file (which is usually under ```${Prefix}/simCodes/datafiles/xxx.txt```).
+- ```filename``` - The path of the generated input simulation data file (which is usually under ```${Prefix}/simCodes/datafiles/{sim_file}.txt```).
 - ```savefile``` - The path to save the planned joint trajectory.
 - ```offset``` - 3x1 vector to define the position trajectory in the world frame.
 - ```trajectory/seed_pose``` - A joint seed for solving the trajectory
@@ -162,9 +162,29 @@ All motion planning parameters are set through a launch file ```helix_run.launch
 - ```trajectory/seed_pose``` - A joint seed for solving the trajectory
 - ```visualization/min_point_distance```- The distance of the visualized discrete trajectory in rviz.
 
-### Running codes
-
-
+### Running codes with docker
+Once the paramters are set. The user should navigate to the folder ```motionPlanning``` first:
+```bash
+ cd motionPlanning 
+```
+Then, the user can build a docker image:
+```bash
+ docker build -t my_motion_planning_image . 
+```
+Next, the use can run the docker image to execute the motion planning with the parameters set before.
+```bash
+docker run -it --rm \
+    --gpus all \
+    --name my_motion_planning_container \
+    -e DISPLAY=$DISPLAY \
+    -e XAUTHORITY=$XAUTHORITY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v $XAUTHORITY:/root/.Xauthority \
+    -v /$(dirname "$PWD")/motionPlanning:/root/motionPlanning \
+    -v /$(dirname "$PWD")/simCodes:/root/simCodes \
+    my_motion_planning_image
+```
+We can find the planned robot joint trajectory is saved under the path specified by the user in the arg ```savefile``` in the ```helix_run.launch```.
 
 ## Data Processing
 The ``DataProcessing`` folder contains the codes and files for classifying the buckling points from experimental data. 

@@ -2,7 +2,7 @@
 
 %% Process parameters
 % withTwist means processing the exp data with external twisting moment
-withTwist = false;
+withTwist = true;
 
 
 %% 
