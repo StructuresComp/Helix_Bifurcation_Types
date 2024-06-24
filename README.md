@@ -143,14 +143,31 @@ Then, the user should generate the input file with simulation by executing the s
 ```
 ## Motion Planning Codes (with Docker)
 The motion planning code is built using ROS Melodic, which is designed for Ubuntu 18.04, limiting its compatibility with other Linux distributions. To address this, we provide instructions on how to use docker to run the code, regardless of your Linux distribution.
+
+***
 ### Dependencies
 Install the following dependencies:
 - [Docker](https://docs.docker.com/engine/install/ubuntu/)
-
 ***
+### Setting parameters
+All motion planning parameters are set through a launch file ```helix_run.launch```. The launch file is located in the subfolder ``motionPlanning/src/helix_text/launch/helix_run.launch``. There are a few parameters in the launch file, and we justify the meaning of each parameter here.
+
+- ```group_name``` - Name of planning group(robot).
+- ```tip_link``` - The frame of the manipulator.
+- ```base_link``` - The frame of the robot base (world frame).
+- ```world_frame``` - The world frame.
+- ```filename``` - The path of the generated input simulation data file (which should be ```/root/simCodes/datafiles/${sim_file}.txt```).
+- ```savefile``` - The path to save the planned joint trajectory (which should be ```/root/motionPlanning/src/helix_text/saveData/${save_file}.txt```).
+- ```offset``` - 3x1 vector to define the position trajectory in the world frame.
+- ```trajectory/seed_pose``` - A joint seed for solving the trajectory
+- ```visualization/min_point_distance```- The distance of the visualized discrete trajectory in rviz.
+
+### Running codes
+
+
 
 ## Data Processing
-The ``DataProcessing`` folder contains the codes and files for classify the buckling points from experimental data. 
+The ``DataProcessing`` folder contains the codes and files for classifying the buckling points from experimental data. 
 
 ### Dependencies
 User should have `MaTLaB` installed in the computer. This script also uses the ``Robotics System Toolbox``
